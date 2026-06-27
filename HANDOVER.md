@@ -90,14 +90,27 @@ struct AlertItem: Identifiable {
 
 ## Suggested build order
 
-1. `ServiceDefinition` model + SwiftData container in `HarbourApp.swift`
-2. `KeychainManager` — save/load/delete by UUID key
-3. `TrueNASClient` — pool health + alerts (cleanest API, start here)
-4. `DashboardView` with one real TrueNAS service
-5. `ServiceDetector` + `AddServiceSheet` — URL probe + credential form
-6. `PollingEngine` — background refresh via `Task` + `.refreshable`
-7. Remaining API clients (Unifi most complex — do last)
-8. `HarbourWidget` — WidgetKit small + medium
+1. ✅ `ServiceDefinition` model + SwiftData container in `HarbourApp.swift`
+2. ✅ `KeychainManager` — save/load/delete by UUID key
+3. ✅ `TrueNASClient` — pool health + alerts (cleanest API, start here)
+4. ✅ `DashboardView` with one real TrueNAS service
+5. ✅ `ServiceDetector` + `AddServiceSheet` — URL probe + credential form
+6. ✅ `PollingEngine` — background refresh via `Task` + `.refreshable`
+7. ⬜ Remaining API clients (Unifi most complex — do last)
+8. ⬜ `HarbourWidget` — WidgetKit small + medium
+
+### Verification status
+
+Steps 1–6 are scaffolded and committed, generated via XcodeGen (`project.yml`). This
+environment has no full Xcode install (CLT only — no iOS SDK, no SwiftData macro
+plugin), so the code is syntax-checked but **not compiled against the iOS SDK**.
+Open `Harbour.xcodeproj` (after `xcodegen generate`) in Xcode and build before
+trusting it fully — expect minor fixes on first build.
+
+`ServiceListView` has a working `.onMove`/`.onDelete` gated behind `EditButton`.
+`CredentialFormView`'s Unifi path packs `username:password` into one Keychain
+string (`UnifiClient` doesn't exist yet to consume it) — revisit when building
+step 7.
 
 ## Hard rules
 

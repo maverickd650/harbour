@@ -81,16 +81,27 @@ HarbourWidget/
 
 iOS 17+ (SwiftData, WidgetKit interactive widgets)
 
-## Getting started with Claude Code
+## Getting started
+
+The Xcode project is generated from [`project.yml`](project.yml) via [XcodeGen](https://github.com/yonaskolb/XcodeGen) — `Harbour.xcodeproj` and `Harbour/Generated/Info.plist` are gitignored, not committed.
 
 ```bash
 git clone https://github.com/YOU/harbour
 cd harbour
-# Open Harbour.xcodeproj in Xcode, or:
+brew install xcodegen
+xcodegen generate
+open Harbour.xcodeproj
+```
+
+Re-run `xcodegen generate` any time you add/remove source files or change `project.yml`.
+
+## Getting started with Claude Code
+
+```bash
 claude
 ```
 
-Suggested first Claude Code prompts:
-- `implement TrueNASClient.swift — pool health, disk temps, and alert endpoints`
-- `build AddServiceSheet with URL detection sequence and Keychain credential storage`
-- `wire up PollingEngine with configurable refresh interval and background task`
+Suggested next Claude Code prompts:
+- `implement UnifiClient.swift — self-signed TLS, session cookie auth, client/health/alarm endpoints`
+- `implement HomeAssistantClient.swift and PlexClient.swift`
+- `build HarbourWidget — small (health strip) + medium (top alert + 2 metrics) WidgetKit extension`
